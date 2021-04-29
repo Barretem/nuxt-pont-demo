@@ -1,0 +1,29 @@
+import { fetch, urlResolve } from '@/utils/fetch';
+
+const getWholePath = (path: string): string => {
+  const prefix = '';
+  return prefix + path;
+};
+/**
+ * @desc 获取请求的URL
+ */
+export function getUrl() {
+  return urlResolve(getWholePath('/user/logout'));
+}
+
+/**
+ * @desc Logs out current logged in user session
+ */
+export function request(options) {
+  const fetchOption = Object.assign(
+    {
+      url: getWholePath('/user/logout'),
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    options,
+  );
+  return fetch(fetchOption);
+}

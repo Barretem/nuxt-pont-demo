@@ -25,10 +25,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({})
+<script>
+export default {
+  mounted() {
+    this.$api.petstore.store.getInventory.request().then((res) => {
+      console.log('res: ', res)
+    })
+    const url = this.$api.petstore.store.getInventory.getUrl()
+    console.log('url: ', url)
+  },
+}
 </script>
 
 <style>

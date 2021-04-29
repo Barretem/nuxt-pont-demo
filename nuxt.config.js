@@ -1,7 +1,17 @@
+const axios = { proxy: true, prefix: '/' }
+
 export default {
   srcDir: 'src/',
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  target: 'static',
+
+  proxy: {
+    '/store/inventory': {
+      target: 'http://localhost:8081', // pont-config.json中配置的端口号
+      changeOrigin: true,
+    },
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,7 +28,7 @@ export default {
   css: ['element-ui/lib/theme-chalk/index.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/element-ui'],
+  plugins: ['@/plugins/element-ui', '@/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,7 +50,7 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios,
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
